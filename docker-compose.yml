@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+#base de datos
+  database:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+    # Contraseña 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    # nombre de la base de datos
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      # Contenedor del la base de datos
+    container_name: pruebas_database
+    # volumen de la base de datos
+    volumes:
+      - ./postgresDB:/var/lib/postgresql/data
+
+# administrador base de datos postgres
+  admin_pgAdmin:
+  
+    container_name: pgadmin
+    depends_on:
+      - database
+    image: dpage/pgadmin4
+    ports:
+      - 8080:80
+    # VOLUMEN PARA GUARDAR LOS DATOS DE PGADMIN
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    user: root
+    environment:
+      # NOMBRE DE USUARIO PARA ACCEDER A PGADMIN
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      # CONTRASEÑA PARA ACCEDER AL PGADMIN
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      
+  
