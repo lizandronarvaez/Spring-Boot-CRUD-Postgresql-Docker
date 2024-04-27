@@ -25,14 +25,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
+
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,@NonNull FilterChain filterChain)throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         // Extraemos el token
         final String token = getTokenFromRequest(request);
         // Almacenar el usuario
         final String userEmailClaims;
-        // Si el token recibido por la cabecera es nulo, no sigue la cadena de filtro(es// como next en nodejs)
+        // Si el token recibido por la cabecera es nulo, no sigue la cadena de
+        // filtro(es// como next en nodejs)
         if (token == null || !requiresAuthentication(request)) {
             filterChain.doFilter(request, response);
             return;
@@ -55,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         // Iniciamos sesion y creamos el token de autenticacion
                         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                                 userEmailClaims, null, userDetails.getAuthorities());
-                                
+
                         // Se realiza la autenticacion con contextHolder
                         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                         // DETALLES PARA AÑADIR LA IP Y EL ID DE SESION
@@ -64,7 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            sendUnauthorizedResponseWithMessage(response,e.getMessage());
+            sendUnauthorizedResponseWithMessage(response, e.getMessage());
             return;
         }
         // continua la cadena de filtros
@@ -85,7 +88,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // Verificar si la solicitud requiere autenticación
     private boolean requiresAuthentication(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
-        return !requestURI.equals("/api/auth") && !requestURI.equals("/api/app/publica");
+        return !requestURI.equals("/api/auth")
+                && !requestURI.equals("/api/app/publica")
+                && !requestURI.equals("/api/clients/login")
+                && !requestURI.equals("/api/products")
+                && !requestURI.equals("/api/categories")
+                && !requestURI.equals("/api/orders");
     }
 
     // Enviar mensaje de error en caso de error en el token
@@ -94,5 +102,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write(message);
     }
-    
+
 }
