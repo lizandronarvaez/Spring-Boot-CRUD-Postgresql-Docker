@@ -29,20 +29,33 @@ public class SecurityConfig {
 
         return httpSecurity
                 // Solo para vistas propias de java
-                .csrf((crsf) -> crsf.disable())
+                .csrf(csrf -> csrf.disable())
                 //
                 .sessionManagement((session) -> {
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                }).authorizeHttpRequests((auth) -> {
+                })
+                .authorizeHttpRequests((auth) -> {
                     ;
                     // Rutas que puedes acceder sin que inicies sesion
+                    // !!TODO: CORREGIR UNA VEZ REALIZADO TODA LA LOGICA - DESARROLLO EN PRUEBAS
                     auth
-                            .requestMatchers("/clients", "/products", "/orders", "/uploads").permitAll()
+                            // Clientes
+                            .requestMatchers("/clients/**").permitAll()
+                            // Productos
+                            .requestMatchers("/products/**").permitAll()
+                            // Pedidos
+                            .requestMatchers("/orders/**").permitAll()
+                            // Categorias
+                            .requestMatchers("/categories").permitAll()
+                            // Archivos para subir
+                            .requestMatchers("/uploads/**").permitAll()
+                            // Ruta de autenticaciones
+                            .requestMatchers("/auth/**").permitAll()
                             // Rutas que solo puedes acceder si estas logeado
-                            .anyRequest().permitAll();
+                            .anyRequest().authenticated();
                 })
-                .authenticationProvider(authenticationProvider)
                 .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .authenticationProvider(authenticationProvider)
                 .build();
     }
 
