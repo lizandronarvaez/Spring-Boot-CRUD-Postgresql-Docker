@@ -6,7 +6,7 @@ services:
     image: postgres:14.3
     restart: always
     ports:
-      - 5432:5432
+      - 65432:5432
     environment:
     # Contraseña 
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -14,9 +14,9 @@ services:
       POSTGRES_DB: ${POSTGRES_DATABASE}
       # Contenedor del la base de datos
     container_name: pruebas_database
-    # volumen de la base de datos
+    # volumen para guardar los datos 
     volumes:
-      - ./postgresDB:/var/lib/postgresql/data
+      - ./postgresDatabase:/var/lib/postgresql/data
 
 # administrador base de datos postgres
   admin_pgAdmin:
@@ -26,7 +26,7 @@ services:
       - database
     image: dpage/pgadmin4
     ports:
-      - 8080:80
+      - 10000:80
     # VOLUMEN PARA GUARDAR LOS DATOS DE PGADMIN
     volumes:
       - ./pgadmin:/var/lib/pgadmin
