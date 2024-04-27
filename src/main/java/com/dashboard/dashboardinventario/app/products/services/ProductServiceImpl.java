@@ -7,8 +7,10 @@ import com.dashboard.dashboardinventario.app.products.models.entity.ProductEntit
 import com.dashboard.dashboardinventario.app.products.repository.CategoryRepository;
 import com.dashboard.dashboardinventario.app.products.repository.ProductRepository;
 import com.dashboard.dashboardinventario.uploads.service.FileUploadServiceImpl;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -114,6 +116,7 @@ public class ProductServiceImpl implements IProductService {
         Integer quantity = productDto.getQuantity();
         //
         AuthResponse product = findProductById(id);
+        System.out.println(product);
         Optional<CategoryEntity> categoryExisting = categoryRepository.findByName(productDto.getCategory());
         CategoryEntity categoryUpdate;
         if (product.getStatus().equals(200)) {
@@ -178,6 +181,16 @@ public class ProductServiceImpl implements IProductService {
                 .product(product.getProduct())
                 .message("¡Producto eliminado correctamente!")
                 .build();
+    }
+
+    @Override
+    public List<ProductEntity> findProductByWord(String word) {
+        System.out.println(word);
+        return ((Collection<ProductEntity>) productRepository
+                .findAll())
+                .stream()
+                .filter(product -> product.getDescription().toLowerCase().contains(word.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
 }

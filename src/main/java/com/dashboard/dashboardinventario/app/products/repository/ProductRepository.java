@@ -1,5 +1,7 @@
 package com.dashboard.dashboardinventario.app.products.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import com.dashboard.dashboardinventario.app.products.models.entity.ProductEntity;
@@ -7,4 +9,5 @@ import com.dashboard.dashboardinventario.app.products.models.entity.ProductEntit
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity,Integer> {
 
+    List<ProductEntity> findByFullname(String fullname);
 }

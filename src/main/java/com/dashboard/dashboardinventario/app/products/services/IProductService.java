@@ -16,6 +16,8 @@ public interface IProductService {
 
     AuthResponse findProductById(Integer id);
 
+    List<ProductEntity> findProductByWord(String word);
+
     AuthResponse updateProduct(MultipartFile file, ProductDto productDto, Integer id);
 
     AuthResponse deleteProduct(Integer id);

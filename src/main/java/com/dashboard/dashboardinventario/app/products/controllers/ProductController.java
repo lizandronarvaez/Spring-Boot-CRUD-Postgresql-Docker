@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dashboard.dashboardinventario.app.products.models.dto.ProductDto;
 import com.dashboard.dashboardinventario.app.products.services.IProductService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = { "http://localhost:5173", "http://localhost:5174" })
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
@@ -60,6 +60,16 @@ public class ProductController {
     public ResponseEntity<?> find(@PathVariable Integer id) {
         try {
             return new ResponseEntity<>(productService.findProductById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Buscar un producto por una palabra
+    @PostMapping("/finds_products")
+    public ResponseEntity<?> findProductByWord(@RequestBody String word) {
+        try {
+            return new ResponseEntity<>(productService.findProductByWord(word), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
