@@ -69,6 +69,7 @@ public class ClientController {
     // Login cliente
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody ClientDto clientDto) {
+        System.out.println(clientDto);
         try {
             return new ResponseEntity<>(clientService.loginClient(clientDto), HttpStatus.OK);
         } catch (Exception e) {

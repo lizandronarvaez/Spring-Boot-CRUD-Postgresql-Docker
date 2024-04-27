@@ -13,6 +13,9 @@ import com.dashboard.dashboardinventario.app.clients.controllers.AuthResponse;
 import com.dashboard.dashboardinventario.app.clients.models.dto.ClientDto;
 import com.dashboard.dashboardinventario.app.clients.models.entities.ClientEntity;
 import com.dashboard.dashboardinventario.app.clients.repository.ClientsRepository;
+import com.dashboard.dashboardinventario.security.auth.validation.EmailNotFoundException;
+import com.dashboard.dashboardinventario.security.auth.validation.PasswordMismatchException;
+import com.dashboard.dashboardinventario.security.jwt.service.JwtService;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,7 @@ public class ClientServiceImpl implements IClientService {
 
     private final ClientsRepository clientRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     // Crea un cliente
     @SuppressWarnings("null")
@@ -134,19 +138,16 @@ public class ClientServiceImpl implements IClientService {
     public AuthResponse loginClient(ClientDto clientDto) {
         Optional<ClientEntity> clientExisting = clientRepository.findByEmail(clientDto.getEmail());
         if (clientExisting.isEmpty()) {
-            return AuthResponse
-                    .builder()
-                    .status(404)
-                    .message(String.format("El email %s no esta registrado", clientDto.getEmail()))
-                    .build();
+            throw new EmailNotFoundException(String.format("¡El email %s no esta registrado!", clientDto.getEmail()));
         }
-
-        // todo: generar el token y devolverlo
+        if (!passwordEncoder.matches(clientDto.getPassword(), clientExisting.get().getPassword())) {
+            throw new PasswordMismatchException("¡Hubo un error en las credenciales!");
+        }
         return AuthResponse
                 .builder()
                 .status(200)
                 .message("¡Te haz logeado correctamente!")
-                .token("token")
+                .token(jwtService.generateToken(clientExisting.get()))
                 .client(clientExisting.get())
                 .build();
     }

@@ -1,7 +1,11 @@
 package com.dashboard.dashboardinventario.app.clients.models.entities;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.dashboard.dashboardinventario.app.orders.models.entities.OrderEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,7 +33,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "clients", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
-public class ClientEntity {
+public class ClientEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +41,7 @@ public class ClientEntity {
 
     @Column(nullable = false)
     private String fullname;
-    
+
     @Column(nullable = false)
     private String email;
 
@@ -50,7 +54,7 @@ public class ClientEntity {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false,name = "postal_code")
+    @Column(nullable = false, name = "postal_code")
     private String postalcode;
 
     @Column(nullable = false)
@@ -63,11 +67,41 @@ public class ClientEntity {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
     private List<OrderEntity> orders;
 
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
