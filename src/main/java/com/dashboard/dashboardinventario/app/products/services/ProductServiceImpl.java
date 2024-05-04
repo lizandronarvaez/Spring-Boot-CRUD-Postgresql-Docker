@@ -114,18 +114,24 @@ public class ProductServiceImpl implements IProductService {
         String description = productDto.getDescription().trim().toLowerCase();
         Double price = productDto.getPrice();
         Integer quantity = productDto.getQuantity();
-        //
+
+        // Verifica la categoria
         AuthResponse product = findProductById(id);
-        System.out.println(product);
-        Optional<CategoryEntity> categoryExisting = categoryRepository.findByName(productDto.getCategory());
         CategoryEntity categoryUpdate;
         if (product.getStatus().equals(200)) {
-            // Verifica la categoria
-            if (categoryExisting.isPresent()) {
-                categoryUpdate = categoryExisting.get();
+
+            if (productDto.getCategory() != null) {
+
+                Optional<CategoryEntity> categoryExisting = categoryRepository.findByName(productDto.getCategory());
+
+                if (categoryExisting.isPresent()) {
+                    categoryUpdate = categoryExisting.get();
+                } else {
+                    CategoryEntity newCategory = CategoryEntity.builder().name(productDto.getCategory()).build();
+                    categoryUpdate = categoryRepository.save(newCategory);
+                }
             } else {
-                categoryUpdate = CategoryEntity.builder().name(productDto.getCategory()).build();
-                categoryUpdate = categoryRepository.save(categoryUpdate);
+                categoryUpdate = product.getProduct().getCategory();
             }
             product.getProduct().setFullname(fullname);
             product.getProduct().setDescription(description);
