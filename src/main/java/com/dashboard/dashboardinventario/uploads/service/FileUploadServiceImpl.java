@@ -9,8 +9,8 @@ import org.springframework.web.multipart.*;
 @Service
 public class FileUploadServiceImpl implements IFileUploadService {
 
-    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
-    private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList("jpeg", "jpg", "png");
+    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; 
+    private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList("jpeg", "jpg", "png","webp");
 
     // Cargar de archivos segun el nombre de carpeta
     @Override
