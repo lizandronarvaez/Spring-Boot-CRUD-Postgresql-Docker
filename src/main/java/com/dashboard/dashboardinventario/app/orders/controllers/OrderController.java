@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = { "http://localhost:5173", "https://app-protein-shop-react.vercel.app/" })
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     // @GetMapping()
     // public ResponseEntity<?> findAll() {
     // try {

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dashboard.dashboardinventario.app.products.models.dto.ProductDto;
 import com.dashboard.dashboardinventario.app.products.services.IProductService;
 
-@CrossOrigin(origins = { "http://localhost:5173", "http://localhost:5174" })
+@CrossOrigin(origins = { "http://localhost:5173", "http://localhost:5174","https://app-protein-shop-react.vercel.app/" })
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor

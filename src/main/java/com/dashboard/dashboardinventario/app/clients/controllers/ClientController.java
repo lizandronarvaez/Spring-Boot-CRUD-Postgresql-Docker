@@ -10,7 +10,8 @@ import com.dashboard.dashboardinventario.app.clients.services.IClientService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = { "http://localhost:5173", "http://localhost:5174/" })
+@CrossOrigin(origins = { "http://localhost:5173", "http://localhost:5174/",
+        "https://app-protein-shop-react.vercel.app/" })
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
