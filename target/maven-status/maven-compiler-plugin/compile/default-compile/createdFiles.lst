@@ -52,6 +52,7 @@ com/dashboard/dashboardinventario/app/orders/models/dto/OrderDto.class
 com/dashboard/dashboardinventario/app/products/services/IProductService.class
 com/dashboard/dashboardinventario/security/auth/controllers/AuthResponse$AuthResponseBuilder.class
 com/dashboard/dashboardinventario/app/products/models/entity/ProductEntity$ProductEntityBuilder.class
+com/dashboard/dashboardinventario/uploads/cloudDinary/configuration/CloudinaryConfiguration.class
 com/dashboard/dashboardinventario/app/clients/models/entities/ClientEntity.class
 com/dashboard/dashboardinventario/security/auth/repository/UserRepository.class
 com/dashboard/dashboardinventario/app/clients/services/ClientServiceImpl.class
