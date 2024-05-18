@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = { "http://localhost:5173", "https://app-protein-shop-react.vercel.app/" })
+@CrossOrigin(origins = { "http://localhost:5173", "https://app-protein-shop-react.vercel.app/","https://crm-frontend-alpha.vercel.app/" })
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
