@@ -43,7 +43,7 @@ public class SecurityConfig {
                             // Ruta de autenticaciones
                             .requestMatchers("/auth/**").permitAll()
                             // ruta de clientes
-                            .requestMatchers(HttpMethod.GET, "/clients/login").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/clients/login").permitAll()
                             .requestMatchers(HttpMethod.POST, "/clients").permitAll()
                             // Rutas que solo puedes acceder si estas logeado
                             .anyRequest().authenticated();
