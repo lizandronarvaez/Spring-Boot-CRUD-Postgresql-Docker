@@ -89,14 +89,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private boolean requiresAuthentication(HttpServletRequest request) {
         // TODO: Revisa logica para acceso a endpoints
         String requestURI = request.getRequestURI();
-        return !requestURI.equals("/api/auth/register")
-                && !requestURI.equals("/api/auth/login")
+        return requestURI.startsWith("/api/auth")
                 && !requestURI.equals("/api/app/publica")
                 && !requestURI.equals("/api/clients/login")
                 && !requestURI.equals("/api/clients/register")
                 && !requestURI.equals("/api/products")
-                && !requestURI.equals("/api/categories")
-                && !requestURI.equals("/api/orders/**");
+                && !requestURI.equals("/api/categories");
     }
 
     // Enviar mensaje de error en caso de error en el token

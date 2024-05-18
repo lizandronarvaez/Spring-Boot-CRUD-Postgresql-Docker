@@ -3,6 +3,7 @@ package com.dashboard.dashboardinventario.security.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -39,18 +40,15 @@ public class SecurityConfig {
                     // Rutas que puedes acceder sin que inicies sesion
                     // !!TODO: CORREGIR UNA VEZ REALIZADO TODA LA LOGICA - DESARROLLO EN PRUEBAS
                     auth
-                            // Clientes
-                            .requestMatchers("/clients/**").permitAll()
                             // Productos
-                            .requestMatchers("/products/**").permitAll()
-                            // Pedidos
-                            .requestMatchers("/orders/**").permitAll()
+                            .requestMatchers(HttpMethod.GET,"/products").permitAll()
                             // Categorias
-                            .requestMatchers("/categories").permitAll()
-                            // Archivos para subir
-                            .requestMatchers("/uploads/**").permitAll()
+                            .requestMatchers(HttpMethod.GET,"/categories").permitAll()
                             // Ruta de autenticaciones
                             .requestMatchers("/auth/**").permitAll()
+                            .requestMatchers(HttpMethod.GET,"/clients/login").permitAll()
+                            .requestMatchers(HttpMethod.POST,"/clients").permitAll()
+                            
                             // Rutas que solo puedes acceder si estas logeado
                             .anyRequest().authenticated();
                 })
