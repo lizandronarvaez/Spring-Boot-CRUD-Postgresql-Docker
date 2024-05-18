@@ -21,22 +21,31 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderEntity createOrder(OrderDto orderDto) {
 
-        // Obtener el client
+        // Obtener el cliente
         ClientEntity clientEntity = orderDto.getClient();
-        // Obetener el total
+        // Obtener el total
         String totalOrder = orderDto.getTotal();
 
         // Creamos la orden
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setClientEntity(clientEntity);
-        orderEntity.setTotal(Double.parseDouble(totalOrder));
+        OrderEntity[] orderEntity = new OrderEntity[1]; // Array de un solo elemento
+        orderEntity[0] = new OrderEntity();
+        orderEntity[0].setClientEntity(clientEntity);
+        orderEntity[0].setTotal(Double.parseDouble(totalOrder));
+
+        // Guardar la orden principal para obtener el ID generado
+        orderEntity[0] = orderRepository.save(orderEntity[0]);
+
+        // Obtener el ID de la orden principal
+        Integer orderId = orderEntity[0].getId();
 
         // Obtener la lista de productos
         List<OrderItemEntity> orderDetails = new ArrayList<>();
         orderDto.getOrder().forEach(product -> {
 
-            // Crea un detalle de pedido
+            // Crear un detalle de pedido
             OrderItemEntity orderItemEntity = OrderItemEntity.builder()
+                    .id(orderId)
+                    .order(orderEntity[0])
                     .product(product)
                     .quantity(product.getQuantity())
                     .price(product.getPrice())
@@ -45,11 +54,26 @@ public class OrderServiceImpl implements OrderService {
             orderDetails.add(orderItemEntity);
         });
 
-        orderEntity.setDetails(orderDetails);
-        System.out.println(orderEntity);
-        orderRepository.save(orderEntity);
+        // Guardar los detalles de la orden en la base de datos
         orderItemRepository.saveAll(orderDetails);
-        return orderEntity;
+
+        // Asignar los detalles de la orden a la orden principal
+        orderEntity[0].setDetails(orderDetails);
+
+        // Actualizar la orden principal en la base de datos para incluir los detalles
+        orderRepository.save(orderEntity[0]);
+
+        return orderEntity[0];
+    }
+
+    @Override
+    public List<OrderEntity> getAllOrders() {
+        return (List<OrderEntity>) orderRepository.findAll();
+    }
+
+    @Override
+    public OrderEntity getOrderById(Integer id) {
+        return orderRepository.findById(id).orElse(null);
     }
 
 }
