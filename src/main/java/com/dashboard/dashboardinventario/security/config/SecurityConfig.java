@@ -31,24 +31,20 @@ public class SecurityConfig {
         return httpSecurity
                 // Solo para vistas propias de java
                 .csrf(csrf -> csrf.disable())
-                //
-                .sessionManagement((session) -> {
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                })
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((auth) -> {
-                    ;
                     // Rutas que puedes acceder sin que inicies sesion
                     // !!TODO: CORREGIR UNA VEZ REALIZADO TODA LA LOGICA - DESARROLLO EN PRUEBAS
                     auth
                             // Productos
-                            .requestMatchers(HttpMethod.GET,"/products").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/products").permitAll()
                             // Categorias
-                            .requestMatchers(HttpMethod.GET,"/categories").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/categories").permitAll()
                             // Ruta de autenticaciones
                             .requestMatchers("/auth/**").permitAll()
-                            .requestMatchers(HttpMethod.GET,"/clients/login").permitAll()
-                            .requestMatchers(HttpMethod.POST,"/clients").permitAll()
-                            
+                            // ruta de clientes
+                            .requestMatchers(HttpMethod.GET, "/clients/login").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/clients").permitAll()
                             // Rutas que solo puedes acceder si estas logeado
                             .anyRequest().authenticated();
                 })
