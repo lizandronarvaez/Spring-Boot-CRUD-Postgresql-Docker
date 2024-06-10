@@ -5,6 +5,7 @@ com/dashboard/dashboardinventario/app/orders/repository/OrderRepository.class
 com/dashboard/dashboardinventario/app/products/controllers/ProductController.class
 com/dashboard/dashboardinventario/app/orders/controllers/OrderController.class
 com/dashboard/dashboardinventario/app/products/validation/AuthErrorResponse.class
+com/dashboard/dashboardinventario/uploads/cloudDinary/service/CloudDinaryService.class
 com/dashboard/dashboardinventario/security/config/SecurityConfig.class
 com/dashboard/dashboardinventario/app/orders/services/OrderServiceImpl.class
 com/dashboard/dashboardinventario/security/auth/validation/PasswordMismatchException.class
@@ -50,6 +51,7 @@ com/dashboard/dashboardinventario/app/products/models/dto/ProductDto.class
 com/dashboard/dashboardinventario/security/jwt/service/JwtService.class
 com/dashboard/dashboardinventario/app/orders/models/dto/OrderDto.class
 com/dashboard/dashboardinventario/app/products/services/IProductService.class
+com/dashboard/dashboardinventario/uploads/cloudDinary/service/CloudDinaryServiceImpl.class
 com/dashboard/dashboardinventario/security/auth/controllers/AuthResponse$AuthResponseBuilder.class
 com/dashboard/dashboardinventario/app/products/models/entity/ProductEntity$ProductEntityBuilder.class
 com/dashboard/dashboardinventario/uploads/cloudDinary/configuration/CloudinaryConfiguration.class
