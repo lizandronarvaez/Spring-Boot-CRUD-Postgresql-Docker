@@ -1,3 +1,4 @@
+/home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/uploads/cloudDinary/service/CloudDinaryService.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/clients/validation/AuthErrorResponse.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/orders/models/dto/OrderItemDTO.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/uploads/service/IFileUploadService.java
@@ -12,6 +13,7 @@
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/security/auth/models/dto/UserDto.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/clients/controllers/ClientController.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/clients/validation/NoFoundException.java
+/home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/uploads/cloudDinary/service/CloudDinaryServiceImpl.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/orders/models/entities/OrderItemEntity.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/security/auth/repository/UserRepository.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/orders/controllers/OrderController.java
@@ -33,6 +35,7 @@
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/clients/services/ClientServiceImpl.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/products/repository/CategoryRepository.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/orders/repository/OrderRepository.java
+/home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/uploads/cloudDinary/configuration/CloudinaryConfiguration.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/products/services/ProductServiceImpl.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/security/config/ApplicationConfig.java
 /home/narvaez/Escritorio/Proyecto-Gimnasio/FullStack-Backend-CRM-SpringBoot/src/main/java/com/dashboard/dashboardinventario/app/products/models/dto/ProductDto.java

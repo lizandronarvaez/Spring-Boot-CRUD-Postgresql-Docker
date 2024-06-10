@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.dashboard.dashboardinventario.app.orders.models.entities.OrderEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -67,6 +66,7 @@ public class ClientEntity implements UserDetails {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
     private List<OrderEntity> orders;
 

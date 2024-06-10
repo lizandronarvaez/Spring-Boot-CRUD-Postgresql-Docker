@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = { "http://localhost:5173", "https://app-protein-shop-react.vercel.app/" })
+@CrossOrigin(origins = { "http://localhost:5173", "https://app-protein-shop-react.vercel.app/","https://crm-frontend-alpha.vercel.app/" })
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
@@ -26,23 +26,23 @@ public class OrderController {
         }
     }
 
-    // @GetMapping()
-    // public ResponseEntity<?> findAll() {
-    // try {
-    // return new ResponseEntity<>("GetAll Results", HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
+    @GetMapping()
+    public ResponseEntity<?> findAll() {
+        try {
+            return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<?> find(@PathVariable Integer id) {
-    // try {
-    // return new ResponseEntity<>("GetOne Result", HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> find(@PathVariable Integer id) {
+        try {
+            return new ResponseEntity<>(orderService.getOrderById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     // @PutMapping()
     // public ResponseEntity<?> update(@RequestBody dto) {

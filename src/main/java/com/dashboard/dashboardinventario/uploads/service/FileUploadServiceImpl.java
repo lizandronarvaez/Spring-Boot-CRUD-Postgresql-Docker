@@ -73,7 +73,7 @@ public class FileUploadServiceImpl implements IFileUploadService {
     public String getPathToSaveUploads(String namePath) {
         String currentDirectory = System.getProperty("user.dir");
         return currentDirectory +
-                "/backend-dashboard-inventario/src/main/resources/static/uploads/" +
+                "/FullStack-Backend-CRM-SpringBoot/src/main/resources/static/uploads/" +
                 namePath;
     }
 

@@ -6,7 +6,7 @@ import com.dashboard.dashboardinventario.app.products.models.entity.CategoryEnti
 import com.dashboard.dashboardinventario.app.products.models.entity.ProductEntity;
 import com.dashboard.dashboardinventario.app.products.repository.CategoryRepository;
 import com.dashboard.dashboardinventario.app.products.repository.ProductRepository;
-import com.dashboard.dashboardinventario.uploads.service.FileUploadServiceImpl;
+import com.dashboard.dashboardinventario.uploads.cloudDinary.service.CloudDinaryService;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +23,7 @@ public class ProductServiceImpl implements IProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
-    private final FileUploadServiceImpl fileUpload;
+    private final CloudDinaryService fileUpload;
 
     @SuppressWarnings("null")
     @Transactional
