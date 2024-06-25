@@ -44,11 +44,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             // Extrae el usuario del token
             userEmailClaims = jwtService.extractUsername(token);
-
             if (userEmailClaims != null || SecurityContextHolder.getContext().getAuthentication() == null) {
                 // BUsca el usuario en la base de datos y comprueba que el usuario existe
                 Optional<UserEntity> userOptional = userRepository.findByEmail(userEmailClaims);
-
                 if (userOptional.isPresent()) {
                     // Crear un userDetails con los datos del usuario
                     UserDetails userDetails = userOptional.get();
@@ -92,7 +90,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || requestURI.equals("/api/clients/login")
                 || requestURI.equals("/api/products")
                 || requestURI.equals("/api/categories")
-                || requestURI.startsWith("/api/auth"));
+                || requestURI.startsWith("/api/auth"))
+                || requestURI.equals("/api/orders");
     }
 
     // Enviar mensaje de error en caso de error en el token
