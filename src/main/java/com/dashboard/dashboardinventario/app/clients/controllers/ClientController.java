@@ -45,8 +45,7 @@ public class ClientController {
         try {
             return new ResponseEntity<>(clientService.findClientById(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());        }
     }
 
     @PutMapping("/{id}")
@@ -54,8 +53,7 @@ public class ClientController {
         try {
             return new ResponseEntity<>(clientService.updateClient(clientDto, id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());        }
     }
 
     @DeleteMapping("/{id}")
@@ -63,18 +61,16 @@ public class ClientController {
         try {
             return new ResponseEntity<>(clientService.deleteClient(id), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());        }
     }
 
     // Login cliente
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody ClientDto clientDto) {
-        System.out.println(clientDto);
         try {
             return new ResponseEntity<>(clientService.loginClient(clientDto), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 }
